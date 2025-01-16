@@ -11,10 +11,12 @@ export class ReservationService {
   private apiURL = "http://localhost:3001"
   private reservations: Reservation[] = [];
 
+  constructor(private http: HttpClient){} 
+
   // CRUD
 
-  getReservations(): Reservation[] {
-    return this.reservations;
+  getReservations(): Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(this.apiURL + "/reservations")
   }
 
   getReservation(id: string): Reservation | undefined {
